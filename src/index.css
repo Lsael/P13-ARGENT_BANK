@@ -19,6 +19,8 @@ body {
 
 .bg-dark {
   background-color: #12002b;
+  display: flex;
+  flex-direction: column;
 }
 
 .sr-only {
@@ -173,7 +175,7 @@ body {
   box-sizing: border-box;
   background-color: white;
   width: 300px;
-  margin: 0 auto;
+  margin: auto;
   padding: 2rem;
 }
 
@@ -296,4 +298,11 @@ body {
   .transaction-button {
     width: 200px;
   }
+}
+
+.login-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
