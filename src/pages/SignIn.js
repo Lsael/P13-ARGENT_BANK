@@ -1,4 +1,10 @@
 import Layout from "../components/Layouts/Layout";
+import { submitLoginData } from "../services/data";
+
+const fakeDatas = {
+  email: "tony@stark.com",
+  password: "password123"
+}
 
 const SignIn = () => {
   return (
@@ -21,9 +27,9 @@ const SignIn = () => {
                 <input type="checkbox" id="remember-me" />
                 <label htmlFor="remember-me">Remember me</label>
               </div>
-              <a href="/account" className="sign-in-button">
+              <span className="sign-in-button" onClick={() => submitLoginData(fakeDatas)}>
                 Sign In
-              </a>
+              </span>
             </form>
           </section>
         </main>
