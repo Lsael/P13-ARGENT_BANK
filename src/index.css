@@ -306,3 +306,9 @@ body {
   flex-direction: column;
   justify-content: space-between;
 }
+
+.login-error {
+  display: none;
+  color: red;
+  font-size: 14px;
+}
