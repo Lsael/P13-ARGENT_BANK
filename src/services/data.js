@@ -4,6 +4,6 @@ export const submitLoginData = async(datas) => {
     const response = await postLogin(datas)
     
     if(response.status === 200) {
-
+        console.log(response);
     }
 };

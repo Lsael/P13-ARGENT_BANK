@@ -1,5 +1,5 @@
 export const postLogin = async (datas) => {
-  const response = await fetch(`http://localhost:3001/api/v1/user/login`, {
+  const response = await fetch(`${process.env.REACT_APP_API_PATH}/user/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
