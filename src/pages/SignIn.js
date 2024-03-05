@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import Layout from "../components/Layouts/Layout";
 import { postLogin } from "../services/fetch.js";
+import { useSelector, useDispatch } from 'react-redux'
+import { setIsLoggedInTrue } from "../stores/loginSlice";
 
 const fakeDatas = {
   email: "tony@stark.com",
@@ -9,14 +11,15 @@ const fakeDatas = {
 };
 
 const SignIn = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const dispatch = useDispatch()
+  const isLoggedIn = useSelector((state) => state.login.value)
 
   const hanbleSubmitLogin = async (datas) => {
     const response = await postLogin(datas);
 
     if (response.status === 200) {
 /*       sessionStorage.setItem("ArgentBankKey", response.body.token); */
-/*       setIsLoggedIn(true); */
+      dispatch(setIsLoggedInTrue())
     } else {
       document.querySelector(".login-error").style.display = "block"
     }
