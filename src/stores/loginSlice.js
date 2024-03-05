@@ -10,10 +10,13 @@ export const loginSlice = createSlice({
   reducers: {
     setIsLoggedInTrue: (state) => {
       state.value = true
+    },
+    setIsLoggedInFalse: (state) => {
+      state.value = false
     }
   }
 })
 
-export const { setIsLoggedInTrue } = loginSlice.actions
+export const { setIsLoggedInTrue, setIsLoggedInFalse } = loginSlice.actions
 
 export default loginSlice.reducer
