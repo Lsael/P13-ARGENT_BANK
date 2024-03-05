@@ -17,7 +17,7 @@ const SignIn = () => {
     const response = await postLogin(datas);
 
     if (response.status === 200) {
-/*       sessionStorage.setItem("ArgentBankKey", response.body.token); */
+      sessionStorage.setItem("ArgentBankKey", response.body.token);
       dispatch(setIsLoggedInTrue())
     } else {
       document.querySelector(".login-error").style.display = "block"

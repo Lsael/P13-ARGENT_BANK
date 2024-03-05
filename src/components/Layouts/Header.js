@@ -14,7 +14,10 @@ const HeaderButtons = () => {
         <i className="fa fa-user-circle"></i>
         Invité
       </Link>
-      <Link className="main-nav-item" to="/login" onClick={() => dispatch(setIsLoggedInFalse())}>
+      <Link className="main-nav-item" to="/login" onClick={() => {
+        sessionStorage.removeItem("ArgentBankKey");
+        dispatch(setIsLoggedInFalse())
+        }}>
         <i className="fa fa-sign-out"></i>
         Sign Out
       </Link>
