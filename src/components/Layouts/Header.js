@@ -1,21 +1,21 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/img/argentBankLogo.png";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setIsLoggedInFalse } from "../../stores/loginSlice";
 
 const HeaderButtons = () => {
   const dispatch = useDispatch()
-  const isLoggedIn = useSelector((state) => state.login.value)
+  const storage = JSON.parse(sessionStorage.getItem("ArgentBank"))
 
-  if(isLoggedIn) {
+  if(storage) {
     return(
       <div>
       <Link className="main-nav-item" to="/account">
         <i className="fa fa-user-circle"></i>
-        Invité
+        {storage.firstName}
       </Link>
       <Link className="main-nav-item" to="/login" onClick={() => {
-        sessionStorage.removeItem("ArgentBankKey");
+        sessionStorage.removeItem("ArgentBank");
         dispatch(setIsLoggedInFalse())
         }}>
         <i className="fa fa-sign-out"></i>
