@@ -1,32 +1,30 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import Layout from "../components/Layouts/Layout";
-import { getUserProfile, postLogin } from "../services/fetch.js";
-import { useSelector } from 'react-redux'
-
-const fakeDatas = {
-  email: "tony@stark.com",
-  password: "password123",
-};
+import { postLogin } from "../services/fetch.js";
+import { setToken } from "../stores/userSlice";
 
 const SignIn = () => {
-  const isLoggedIn = useSelector((state) => state.login.value)
+  const dispatch = useDispatch()
+  const token = useSelector((state) => state.user.token)
 
-  const hanbleSubmitLogin = async (datas) => {
-    const response = await postLogin(datas);
+  const hanbleSubmitLogin = async () => {
+    const username = document.querySelector("#username").value
+    const password = document.querySelector("#password").value
+    const response = await postLogin({
+      email: username,
+      password: password
+    });
 
     if (response.status === 200) {
-      const token = response.body.token
-      const userDatas = await getUserProfile(token)
-      sessionStorage.setItem("ArgentBank", JSON.stringify({
-        token:response.body.token,
-        firstName: userDatas.body.firstName
-      }));
+      sessionStorage.setItem("ArgentBank", response.body.token);
+      dispatch(setToken(response.body.token))
     } else {
       document.querySelector(".login-error").style.display = "block"
     }
   };
 
-  if (isLoggedIn) {
+  if (token) {
     return <Navigate to="/account" />;
   } else {
     return (
@@ -49,7 +47,7 @@ const SignIn = () => {
                   <input type="checkbox" id="remember-me" />
                   <label htmlFor="remember-me">Remember me</label>
                 </div>
-                <button className="sign-in-button" onClick={() => hanbleSubmitLogin(fakeDatas)}>
+                <button className="sign-in-button" onClick={() => hanbleSubmitLogin()}>
                   Sign In
                 </button>
                 <span className="login-error">Incorrect Username or password</span>

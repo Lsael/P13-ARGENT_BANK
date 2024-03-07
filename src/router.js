@@ -3,27 +3,26 @@ import Home from './pages/Home';
 import ErrorPage from './pages/ErrorPage'
 import SignIn from './pages/SignIn';
 import Account from './pages/Account';
+import App from './App';
 
 export const router = createBrowserRouter([
     {
       path: "/",
-      element: <Navigate to='home' />,
+      element: <App />,
       errorElement: <ErrorPage />,
+      children: [
+        {
+          index: true,
+          element: <Home />
+        },
+        {
+          path: "login",
+          element: <SignIn />,
+        },
+        {
+          path: "account",
+          element: <Account />,
+        }
+      ]
     },
-    {
-      path: "home",
-      element: <Home />,
-      errorElement: <ErrorPage />,
-      index: true
-    },
-    {
-      path: "login",
-      element: <SignIn />,
-      errorElement: <ErrorPage />,
-    },
-    {
-      path: "account",
-      element: <Account />,
-      errorElement: <ErrorPage />,
-    }
   ]);

@@ -1,22 +1,23 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "../../assets/img/argentBankLogo.png";
-import { useDispatch } from "react-redux";
-import { setIsLoggedInFalse } from "../../stores/loginSlice";
+import { setToken } from "../../stores/userSlice";
 
 const HeaderButtons = () => {
   const dispatch = useDispatch()
-  const storage = JSON.parse(sessionStorage.getItem("ArgentBank"))
+  const firstName = useSelector((state) => state.user.userDatas.firstName)
+  const token = useSelector((state) => state.user.token)
 
-  if(storage) {
+  if(token) {
     return(
       <div>
       <Link className="main-nav-item" to="/account">
         <i className="fa fa-user-circle"></i>
-        {storage.firstName}
+        {firstName}
       </Link>
       <Link className="main-nav-item" to="/login" onClick={() => {
         sessionStorage.removeItem("ArgentBank");
-        dispatch(setIsLoggedInFalse())
+        dispatch(setToken(false))
         }}>
         <i className="fa fa-sign-out"></i>
         Sign Out
@@ -39,7 +40,7 @@ const Header = () => {
   return (
     <header>
       <nav className="main-nav">
-        <Link className="main-nav-logo" to="/home">
+        <Link className="main-nav-logo" to="/">
           <img className="main-nav-logo-image" src={logo} alt="Argent Bank Logo" />
           <h1 className="sr-only">Argent Bank</h1>
         </Link>
