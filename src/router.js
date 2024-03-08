@@ -1,8 +1,8 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import Home from './pages/Home';
 import ErrorPage from './pages/ErrorPage'
 import SignIn from './pages/SignIn';
-import Account from './pages/Account';
+import Profile from './pages/Profile';
 import App from './App';
 
 export const router = createBrowserRouter([
@@ -20,8 +20,8 @@ export const router = createBrowserRouter([
           element: <SignIn />,
         },
         {
-          path: "account",
-          element: <Account />,
+          path: "profile",
+          element: <Profile />,
         }
       ]
     },

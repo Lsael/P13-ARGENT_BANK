@@ -25,7 +25,7 @@ const SignIn = () => {
   };
 
   if (token) {
-    return <Navigate to="/account" />;
+    return <Navigate to="/profile" />;
   } else {
     return (
       <div className="login-page">

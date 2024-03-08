@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import Layout from "../components/Layouts/Layout";
 
-const Account = () => {
+const Profil = () => {
   const user = useSelector((state) => state.user)
 
   if(!user.token) {
@@ -52,4 +52,4 @@ const Account = () => {
   }
 };
 
-export default Account;
+export default Profil;

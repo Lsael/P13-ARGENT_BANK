@@ -11,11 +11,11 @@ const HeaderButtons = () => {
   if(token) {
     return(
       <div>
-      <Link className="main-nav-item" to="/account">
+      <Link className="main-nav-item" to="/profile">
         <i className="fa fa-user-circle"></i>
         {firstName}
       </Link>
-      <Link className="main-nav-item" to="/login" onClick={() => {
+      <Link className="main-nav-item" to="/" onClick={() => {
         sessionStorage.removeItem("ArgentBank");
         dispatch(setToken(false))
         }}>
