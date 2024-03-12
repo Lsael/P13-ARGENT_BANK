@@ -1,8 +1,8 @@
+
 import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { getUserProfile } from "./services/fetch";
 import { setToken, setUserDatas } from "./stores/userSlice";
-
 
 export const SetGlobalState = async (token) => {
   const dispatch = useDispatch()

@@ -12,7 +12,7 @@ const Profil = () => {
       <Layout>
         <main className="main bg-dark">
         <div className="header">
-          <h1>Welcome back<br />{`${user.userDatas.firstName} ${user.userDatas.lastName}`}</h1>
+          <h1 id="profile-username">Welcome back<br />{`${user.userDatas.firstName} ${user.userDatas.lastName}`}</h1>
           <button className="edit-button">Edit Name</button>
         </div>
         <h2 className="sr-only">Accounts</h2>
