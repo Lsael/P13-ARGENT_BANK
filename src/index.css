@@ -295,6 +295,14 @@ body {
   cursor: pointer;
 }
 
+.error-edit-name-dialog {
+  display: none;
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  color: red;
+}
+
 .header {
   color: #fff;
   margin-bottom: 2rem;

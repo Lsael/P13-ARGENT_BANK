@@ -23,3 +23,17 @@ export const getUserProfile = async (token) => {
   const result = await response.json();
   return result;
 };
+
+export const updateUserName = async (token, datas) => {
+  const response = await fetch(`${process.env.REACT_APP_API_PATH}/user/profile`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: datas
+  });
+
+  const result = await response.json();
+  return result;
+};
