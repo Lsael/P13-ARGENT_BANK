@@ -1,32 +1,38 @@
-
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
+import Layout from "./components/Layouts/Layout";
 import { getUserProfile } from "./services/fetch";
 import { setToken, setUserDatas } from "./stores/userSlice";
 
-export const SetGlobalState = async (token) => {
-  const dispatch = useDispatch()
-  const userProfile = await getUserProfile(token)
-  const datas = {
-    firstName: userProfile.body.firstName,
-    lastName: userProfile.body.lastName,
-    email: userProfile.body.email,
-    userId: userProfile.body.id
-  }
-  dispatch(setUserDatas(datas))
-  dispatch(setToken(token))
-}
-
 const App = () => {
-  const token = sessionStorage.getItem("ArgentBank")
-  
-  if(token) {
-    SetGlobalState(token)
+  const dispatch = useDispatch();
+  const token = sessionStorage.getItem("ArgentBank");
+  const tokenState = useSelector((state) => state.user.token)
+
+  if (token) {
+    dispatch(setToken(token));
   }
+
+  useEffect(() => {
+    getUserProfile(tokenState).then((res) => {
+      if(res.status == 200) {
+        const datas = {
+          firstName: res.body.firstName,
+          lastName: res.body.lastName,
+          email: res.body.email,
+          userId: res.body.id,
+        };
+        return dispatch(setUserDatas(datas));
+      }
+    })
+  }, [tokenState, dispatch])
 
   return (
     <div className="App">
-      <Outlet />
+      <Layout>
+        <Outlet />
+      </Layout>
     </div>
   );
 };

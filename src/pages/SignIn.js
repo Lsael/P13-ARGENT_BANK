@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import Layout from "../components/Layouts/Layout";
 import { postLogin } from "../services/fetch.js";
 import { setToken } from "../stores/userSlice";
 
@@ -29,7 +28,6 @@ const SignIn = () => {
   } else {
     return (
       <div className="login-page">
-        <Layout>
           <main className="main bg-dark">
             <section className="sign-in-content">
               <i className="fa fa-user-circle sign-in-icon"></i>
@@ -54,7 +52,6 @@ const SignIn = () => {
               </form>
             </section>
           </main>
-        </Layout>
       </div>
     );
   }

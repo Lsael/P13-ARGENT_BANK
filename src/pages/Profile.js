@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import Layout from "../components/Layouts/Layout";
 
 const Profil = () => {
   const user = useSelector((state) => state.user)
@@ -9,7 +8,6 @@ const Profil = () => {
     return <Navigate to="/login" />;
   } else {
     return (
-      <Layout>
         <main className="main bg-dark">
         <div className="header">
           <h1 id="profile-username">Welcome back<br />{`${user.userDatas.firstName} ${user.userDatas.lastName}`}</h1>
@@ -47,7 +45,6 @@ const Profil = () => {
           </div>
         </section>
       </main>
-      </Layout>
     );
   }
 };

@@ -1,11 +1,9 @@
-import Layout from "../components/Layouts/Layout.js"
 import iconChat from "../assets/img/icon-chat.png"
 import iconMoney from "../assets/img/icon-money.png"
 import iconSecurity from "../assets/img/icon-security.png"
 
 const Home = () => {
   return (
-    <Layout>
       <div>
         <main>
           <div className="hero">
@@ -60,7 +58,6 @@ const Home = () => {
           </section>
         </main>
       </div>
-    </Layout>
   );
 };
 
