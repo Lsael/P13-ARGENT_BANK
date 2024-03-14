@@ -264,6 +264,21 @@ body {
   padding: 10px;
 }
 
+#edit-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#edit-modal input {
+  text-align: center;
+}
+
+#close-modal-button {
+  position: absolute;
+  right: 10%;
+}
+
 .header {
   color: #fff;
   margin-bottom: 2rem;
