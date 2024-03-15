@@ -15,17 +15,19 @@ const App = () => {
   }
 
   useEffect(() => {
-    getUserProfile(tokenState).then((res) => {
-      if(res.status == 200) {
-        const datas = {
-          firstName: res.body.firstName,
-          lastName: res.body.lastName,
-          email: res.body.email,
-          userId: res.body.id,
-        };
-        return dispatch(setUserDatas(datas));
-      }
-    })
+    if(tokenState) {
+      getUserProfile(tokenState).then((res) => {
+        if(res.status == 200) {
+          const datas = {
+            firstName: res.body.firstName,
+            lastName: res.body.lastName,
+            email: res.body.email,
+            userId: res.body.id,
+          };
+          return dispatch(setUserDatas(datas));
+        }
+      })
+    } 
   }, [tokenState, dispatch])
 
   return (
