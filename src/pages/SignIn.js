@@ -7,6 +7,14 @@ const SignIn = () => {
   const dispatch = useDispatch()
   const token = useSelector((state) => state.user.token)
 
+  const handleRememberMe = (token) => {
+    const checkbox = document.querySelector('#remember-me').checked
+    
+    if(checkbox) {
+      localStorage.setItem("ArgentBank", token)
+    }
+  }
+
   const hanbleSubmitLogin = async () => {
     const username = document.querySelector("#username").value
     const password = document.querySelector("#password").value
@@ -17,6 +25,7 @@ const SignIn = () => {
 
     if (response.status === 200) {
       sessionStorage.setItem("ArgentBank", response.body.token);
+      handleRememberMe(response.body.token)
       dispatch(setToken(response.body.token))
     } else {
       document.querySelector(".login-error").style.display = "block"
@@ -32,7 +41,7 @@ const SignIn = () => {
             <section className="sign-in-content">
               <i className="fa fa-user-circle sign-in-icon"></i>
               <h1>Sign In</h1>
-              <form onSubmit={(e) => e.preventDefault()}>
+              <form onSubmit={(e) => e.preventDefault()} autoComplete="off">
                 <div className="input-wrapper">
                   <label htmlFor="username">Username</label>
                   <input type="text" id="username" />
@@ -42,7 +51,7 @@ const SignIn = () => {
                   <input type="password" id="password" />
                 </div>
                 <div className="input-remember">
-                  <input type="checkbox" id="remember-me" />
+                  <input type="checkbox" id="remember-me" defaultChecked={true} />
                   <label htmlFor="remember-me">Remember me</label>
                 </div>
                 <button className="sign-in-button" onClick={() => hanbleSubmitLogin()}>

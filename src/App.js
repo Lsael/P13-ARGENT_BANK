@@ -7,11 +7,15 @@ import { setToken, setUserDatas } from "./stores/userSlice";
 
 const App = () => {
   const dispatch = useDispatch();
-  const token = sessionStorage.getItem("ArgentBank");
+  const sessionToken = sessionStorage.getItem("ArgentBank");
+  const localToken = localStorage.getItem("ArgentBank");
   const tokenState = useSelector((state) => state.user.token)
 
-  if (token) {
-    dispatch(setToken(token));
+  if (sessionToken) {
+    dispatch(setToken(sessionToken));
+  } else if(localToken) {
+    dispatch(setToken(localToken));
+    sessionStorage.setItem("ArgentBank", localToken)
   }
 
   useEffect(() => {

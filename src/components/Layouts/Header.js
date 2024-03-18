@@ -17,6 +17,7 @@ const HeaderButtons = () => {
       </Link>
       <Link className="main-nav-item" to="/" onClick={() => {
         sessionStorage.removeItem("ArgentBank");
+        localStorage.removeItem("ArgentBank");
         dispatch(setToken(false))
         }}>
         <i className="fa fa-sign-out"></i>
