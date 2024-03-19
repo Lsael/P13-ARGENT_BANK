@@ -41,7 +41,7 @@ const SignIn = () => {
             <section className="sign-in-content">
               <i className="fa fa-user-circle sign-in-icon"></i>
               <h1>Sign In</h1>
-              <form onSubmit={(e) => e.preventDefault()} autoComplete="off">
+              <form onSubmit={(e) => e.preventDefault()}>
                 <div className="input-wrapper">
                   <label htmlFor="username">Username</label>
                   <input type="text" id="username" />
