@@ -1,5 +1,5 @@
 # ARGENT BANK
-## Projet 13 Openclassrooms
+## Project 13 Openclassrooms
 
 ### Prerequisites
 For the backend you may need :
@@ -25,7 +25,7 @@ To launch both servers:
 # launch front-end server
 npm start
 
-# launch back-end server
+# launch back-end server (in another terminal)
 cd backend
 npm run dev:server
 
@@ -33,5 +33,5 @@ npm run dev:server
 npm run populate-db
 ```
 
-Front-end server on http://localhost:3000
+Front-end server on http://localhost:3000  
 Back-end server on http://localhost:3001
