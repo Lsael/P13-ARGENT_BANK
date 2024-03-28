@@ -51,7 +51,7 @@ const SignIn = () => {
                   <input type="password" id="password" />
                 </div>
                 <div className="input-remember">
-                  <input type="checkbox" id="remember-me" defaultChecked={true} />
+                  <input type="checkbox" id="remember-me" />
                   <label htmlFor="remember-me">Remember me</label>
                 </div>
                 <button className="sign-in-button" onClick={() => hanbleSubmitLogin()}>

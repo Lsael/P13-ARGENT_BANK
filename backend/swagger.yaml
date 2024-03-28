@@ -347,6 +347,4 @@ definitions:
         type: string
       object:
         type: string
-      amount:
-        type: string
 
