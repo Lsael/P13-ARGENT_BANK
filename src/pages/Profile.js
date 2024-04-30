@@ -67,7 +67,7 @@ const Profil = () => {
               id="firstName-input"
               type={"text"}
               defaultValue={firstName}
-              onChange={(e) => e.target.value.length > 0 ? setNewFirstname(e.target.value) : setNewFirstname(firstName)}
+              onChange={(e) => setNewFirstname(e.target.value)}
             ></input>
             <span htmlFor="lastName-input">New lastname</span>
             <input
@@ -75,7 +75,7 @@ const Profil = () => {
               id="lastName-input"
               type={"text"}
               defaultValue={lastName}
-              onChange={(e) => e.target.value.length > 0 ? setNewLastname(e.target.value) : setNewLastname(lastName)}
+              onChange={(e) => setNewLastname(e.target.value)}
             ></input>
             <button onClick={handleChangeName}>Validate</button>
           </dialog>
