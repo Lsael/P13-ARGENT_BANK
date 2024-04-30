@@ -1,11 +1,7 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { updateUserName } from "../services/fetch";
-import {
-  setModalState,
-  setNewFirstname,
-  setNewLastname,
-} from "../stores/modalSlice";
 import { setUserDatas } from "../stores/userSlice";
 
 const Profil = () => {
@@ -13,20 +9,22 @@ const Profil = () => {
   const user = useSelector((state) => state.user);
   const firstName = useSelector((state) => state.user.userDatas.firstName);
   const lastName = useSelector((state) => state.user.userDatas.lastName);
-  const modal = useSelector((state) => state.modal);
+  const [modalState, setModalState] = useState(false)
+  const [newFirstname, setNewFirstname] = useState('')
+  const [newLastname, setNewLastname] = useState('')
 
   const handleOpenModal = () => {
-    dispatch(setModalState("open"));
+    setModalState("open");
   };
 
   const handleCloseModal = () => {
-    dispatch(setModalState(false));
+    setModalState(false);
   };
 
   const handleChangeName = () => {
     let datas = {
-      firstName: modal.newFirstname.length > 0 ? modal.newFirstname : firstName,
-      lastName: modal.newLastname.length > 0 ? modal.newLastname : lastName,
+      firstName: newFirstname.length > 0 ? newFirstname : firstName,
+      lastName: newLastname.length > 0 ? newLastname : lastName,
       email: user.userDatas.email,
       userId: user.userDatas.userId,
     };
@@ -35,12 +33,12 @@ const Profil = () => {
     updateUserName(
       user.token,
       JSON.stringify({
-        firstName: modal.newFirstname,
-        lastName: modal.newLastname,
+        firstName: newFirstname.length > 0 ? newFirstname : firstName,
+        lastName: newLastname.length > 0 ? newLastname : lastName,
       })
     );
 
-    dispatch(setModalState(false));
+    setModalState(false);
   };
 
   if (!user.token) {
@@ -57,7 +55,7 @@ const Profil = () => {
           <button className="edit-button" onClick={handleOpenModal}>
             Edit Name
           </button>
-          <dialog id="edit-modal" open={modal.modalState}>
+          <dialog id="edit-modal" open={modalState}>
             <i className="fa fa-user-circle sign-in-icon"></i>
             <span id="close-modal-button" onClick={handleCloseModal}>
               &#10006;
@@ -69,7 +67,7 @@ const Profil = () => {
               id="firstName-input"
               type={"text"}
               defaultValue={firstName}
-              onChange={(e) => dispatch(setNewFirstname(e.target.value))}
+              onChange={(e) => e.target.value.length > 0 ? setNewFirstname(e.target.value) : setNewFirstname(firstName)}
             ></input>
             <span htmlFor="lastName-input">New lastname</span>
             <input
@@ -77,7 +75,7 @@ const Profil = () => {
               id="lastName-input"
               type={"text"}
               defaultValue={lastName}
-              onChange={(e) => dispatch(setNewLastname(e.target.value))}
+              onChange={(e) => e.target.value.length > 0 ? setNewLastname(e.target.value) : setNewLastname(lastName)}
             ></input>
             <button onClick={handleChangeName}>Validate</button>
           </dialog>
