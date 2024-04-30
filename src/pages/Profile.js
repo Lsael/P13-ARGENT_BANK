@@ -1,64 +1,85 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { updateUserName } from "../services/fetch";
+import {
+  setModalState,
+  setNewFirstname,
+  setNewLastname,
+} from "../stores/modalSlice";
 import { setUserDatas } from "../stores/userSlice";
 
 const Profil = () => {
-  const dispatch = useDispatch()
-  const user = useSelector((state) => state.user)
-  const firstName = useSelector((state) => state.user.userDatas.firstName)
-  const lastName = useSelector((state) => state.user.userDatas.lastName)
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const firstName = useSelector((state) => state.user.userDatas.firstName);
+  const lastName = useSelector((state) => state.user.userDatas.lastName);
+  const modal = useSelector((state) => state.modal);
 
   const handleOpenModal = () => {
-    document.querySelector("#edit-modal").showModal()
-  }
+    dispatch(setModalState("open"));
+  };
 
   const handleCloseModal = () => {
-    document.querySelector("#edit-modal").close()
-  }
+    dispatch(setModalState(false));
+  };
 
   const handleChangeName = () => {
-    const newFirstName = document.querySelector("#firstName-input").value
-    const newLastName = document.querySelector("#lastName-input").value
-
-    if(newFirstName.length == 0 || newLastName.length == 0) {
-      return document.querySelector(".error-edit-name-dialog").style.display = "block"
-    }
-
     let datas = {
-        firstName: newFirstName,
-        lastName: newLastName,
-        email: user.userDatas.email,
-        userId: user.userDatas.userId,
-    }
-    dispatch(setUserDatas(datas))
+      firstName: modal.newFirstname.length > 0 ? modal.newFirstname : firstName,
+      lastName: modal.newLastname.length > 0 ? modal.newLastname : lastName,
+      email: user.userDatas.email,
+      userId: user.userDatas.userId,
+    };
+    dispatch(setUserDatas(datas));
 
-    updateUserName(user.token, JSON.stringify({
-      firstName: newFirstName,
-      lastName: newLastName
-    }))
-    
-    document.querySelector("#edit-modal").close()
-  }
+    updateUserName(
+      user.token,
+      JSON.stringify({
+        firstName: modal.newFirstname,
+        lastName: modal.newLastname,
+      })
+    );
 
-  if(!user.token) {
+    dispatch(setModalState(false));
+  };
+
+  if (!user.token) {
     return <Navigate to="/login" />;
   } else {
     return (
-        <main className="main bg-dark">
+      <main className="main bg-dark">
         <div className="header">
-          <h1 id="profile-username">Welcome back<br />{`${firstName} ${lastName}`}</h1>
-          <button className="edit-button" onClick={handleOpenModal}>Edit Name</button>
-          <dialog id="edit-modal">
+          <h1 id="profile-username">
+            Welcome back
+            <br />
+            {`${firstName} ${lastName}`}
+          </h1>
+          <button className="edit-button" onClick={handleOpenModal}>
+            Edit Name
+          </button>
+          <dialog id="edit-modal" open={modal.modalState}>
             <i className="fa fa-user-circle sign-in-icon"></i>
-            <span id="close-modal-button" onClick={handleCloseModal}>&#10006;</span>
+            <span id="close-modal-button" onClick={handleCloseModal}>
+              &#10006;
+            </span>
             <span></span>
             <span htmlFor="firstName-input">New firstname</span>
-            <input name="firstName-input" id="firstName-input" type={"text"} defaultValue={firstName}></input>
+            <input
+              name="firstName-input"
+              id="firstName-input"
+              type={"text"}
+              defaultValue={firstName}
+              onChange={(e) => dispatch(setNewFirstname(e.target.value))}
+            ></input>
             <span htmlFor="lastName-input">New lastname</span>
-            <input name="lastName-input" id="lastName-input" type={"text"} defaultValue={lastName}></input>
+            <input
+              name="lastName-input"
+              id="lastName-input"
+              type={"text"}
+              defaultValue={lastName}
+              onChange={(e) => dispatch(setNewLastname(e.target.value))}
+            ></input>
             <button onClick={handleChangeName}>Validate</button>
-            <span className="error-edit-name-dialog">Incorrect informations</span>
           </dialog>
         </div>
         <h2 className="sr-only">Accounts</h2>
