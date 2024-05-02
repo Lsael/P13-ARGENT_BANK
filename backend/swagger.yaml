@@ -345,6 +345,6 @@ definitions:
     properties:
       name:
         type: string
-      object:
+      notes:
         type: string
 
