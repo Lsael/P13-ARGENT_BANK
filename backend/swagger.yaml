@@ -189,6 +189,29 @@ paths:
           description: Invalid Token or ID
         "500":
           description: Internal Server Error
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - User Module
+      summary: User Transaction API
+      description: API to create a transaction
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Transaction retrieved successully
+          schema:
+              $ref: "#/definitions/TransactionCreation"
+        "400":
+          description: Invalid Token or ID
+        "500":
+          description: Internal Server Error
     put:
       security:
         - Bearer: []
@@ -331,6 +354,21 @@ definitions:
       id:
         type: string
         description: transaction id
+      date:
+        type: string
+        description: transaction date
+      notes: 
+        type: string
+        description: transaction description
+      amount:
+        type: string
+        description: transaction value
+  TransactionCreation:
+    type: object
+    properties:
+      name:
+        type: string
+        description: transaction balance
       date:
         type: string
         description: transaction date
